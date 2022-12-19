@@ -1,4 +1,5 @@
 var fmrAdicionar = document.getElementById("add-item");
+var listaItems = document.getElementById("lista-items");
 var itens = [];
 
 
@@ -11,6 +12,8 @@ fmrAdicionar.addEventListener("submit", (dados) => {
     criarElemento(nome, quantidade);
 });
 
+
+//CRIAR ELEMENTO
 function criarElemento (nome, quantidade){
 
     if(nome.length > 0 && quantidade.length > 0 && quantidade > 0){
@@ -25,8 +28,7 @@ function criarElemento (nome, quantidade){
         
         //o nome vem dps da tag strong
         novoItem.innerHTML += nome;
-    
-        let listaItems = document.getElementById("lista-items");
+
         listaItems.appendChild(novoItem);
 
         //objeto referente ao item do array
@@ -38,7 +40,7 @@ function criarElemento (nome, quantidade){
         itens.push(item);
 
         //salvando no localstorage do navegador e convertendo o objeto para tipo string (por conta do json)
-        localStorage.setItem("item", JSON.stringify(itens));
+        localStorage.setItem("item", JSON.stringify(itens));   
     }
 
     else if(quantidade < 0){
