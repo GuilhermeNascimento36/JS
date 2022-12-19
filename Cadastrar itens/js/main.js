@@ -74,9 +74,29 @@ function criarElemento (item){
     novoItem.innerHTML += item.nome;
 
     listaItems.appendChild(novoItem);
+
+    //criando btn deletar no html
+    novoItem.appendChild(btnDeletar());
 }
 
 function atualizarItens(item){
     //adicionando a quantidade de acordo com o data-id passado
     document.querySelector("[data-id='" + item.id + "']").innerHTML = item.quantidade;
+}
+
+function btnDeletar(){
+    let btnDeletar = document.createElement("button");
+    btnDeletar.innerText = "X";
+    btnDeletar.classList.add("btn-deletar");
+
+    btnDeletar.addEventListener("click", function(){
+        //elemento selecionado será removido, porém seu pai tbm ("então foi isso que aconteceu com ele?")
+        deletar(this.parentNode);
+    })
+
+    return btnDeletar;
+}
+
+function deletar(elemento){
+    elemento.remove();
 }
