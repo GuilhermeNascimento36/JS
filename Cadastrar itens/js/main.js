@@ -24,23 +24,13 @@ fmrAdicionar.addEventListener("submit", (dados) => {
     let verificaElemento = itens.find(elemento => elemento.nome === nome.value);
 
     if(verificaElemento){
-        //elemento encontrado, alocamos o valor no elemento de mesmo id
         item.id = verificaElemento.id;
         atualizarItens(item);
-
-        //atualizando no array
-        //verificando se o elemento existente é realmente igual ao elemento a ser atualizado
         itens[itens.findIndex(elemento =>  elemento.id === verificaElemento.id)] = item;
     }
     else{
         if(quantidade.value.length > 0 && nome.value.length > 0 && quantidade.value > 0){
-            //operador ternário para verificar se o array está nulo
-            //fazendo o incremento de acordo com o tamanho do array, array na posição do tamanho -1
-            //operador ternário:
-            //condição ? true : false
-            //se verdadeiro a gnt atribuí o id ao item, incrementando-o. Se não (array nulo) - passamos 0, pois é o primeiro elemento
             item.id = itens[itens.length -1] ? (itens[itens.length-1].id +1): 0
-
             criarElemento(item);
             itens.push(item); 
         }
@@ -55,10 +45,7 @@ fmrAdicionar.addEventListener("submit", (dados) => {
             alert("Erro! Não é possível adicionar um produto nulo.");
         }
     }
-
-    //salvando no localstorage do navegador e convertendo o objeto para tipo string (por conta do json)
     localStorage.setItem("itens", JSON.stringify(itens));  
-
     nome.value = "";
     quantidade.value = "";
 });
@@ -97,16 +84,15 @@ function btnDeletar(id){
     btnDeletar.classList.add("btn-deletar");
 
     btnDeletar.addEventListener("click", function(){
-        //elemento selecionado será removido, porém seu pai tbm ("então foi isso que aconteceu com ele?")
+        //elemento selecionado será removido, porém seu pai tbm :o
         deletar(this.parentNode, id);
     })
-
     return btnDeletar;
 }
 
 function deletar(produto, id){
     produto.remove();
-
+    
     //splice remove um item do array de acordo com os parâmetros
     //no primeiro parâmetro estamos buscando no array o elemento clicado com base no id
     //no segundo parâmetro estamos informando a quantidade de elementos que serão deletados de acordo com a posição passada 
